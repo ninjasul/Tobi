@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/springbook/learningtest/jdk/proxy/DynamicProxyTest.java=UTF-8
+encoding//src/springbook/user/dao/UserDaoTest.java=UTF-8
+encoding//src/springbook/user/domain/User.java=UTF-8
+encoding//src/springbook/user/service=UTF-8
+encoding//src/springbook/user/service/TxProxyFactoryBean.java=UTF-8
+encoding//src/springbook/user/service/UserServiceImpl.java=UTF-8
+encoding//src/test-applicationContext.xml=MS949
+encoding/<project>=UTF-8
