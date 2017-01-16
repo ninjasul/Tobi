@@ -121,13 +121,13 @@ public class DynamicProxyTest {
 		ProxyFactoryBean pfBean = new ProxyFactoryBean();
 		pfBean.setTarget(new HelloTarget());
 		
-		// ¸Ş¼Òµå ÀÌ¸§À» ºñ±³ÇØ¼­ ´ë»óÀ» ¼±Á¤ÇÏ´Â ¾Ë°í¸®ÁòÀ» Á¦°øÇÏ´Â Æ÷ÀÎÆ® ÄÆ »ı¼º
+		// ë©”ì†Œë“œ ì´ë¦„ì„ ë¹„êµí•´ì„œ ëŒ€ìƒì„ ì„ ì •í•˜ëŠ” ì•Œê³ ë¦¬ì¦˜ì„ ì œê³µí•˜ëŠ” í¬ì¸íŠ¸ ì»· ìƒì„±
 		NameMatchMethodPointcut pointcut = new NameMatchMethodPointcut();
 		
-		// ÀÌ¸§ ºñ±³Á¶°Ç ¼³Á¤. sayH·Î ½ÃÀÛÇÏ´Â ¸ğµç ¸Ş¼Òµå¸¦ ¼±ÅÃÇÏ°Ô ÇÔ.
+		// ì´ë¦„ ë¹„êµì¡°ê±´ ì„¤ì •. sayHë¡œ ì‹œì‘í•˜ëŠ” ëª¨ë“  ë©”ì†Œë“œë¥¼ ì„ íƒí•˜ê²Œ í•¨.
 		pointcut.setMappedName("sayH*"); 
 		
-		// Æ÷ÀÎÆ® ÄÆ°ú ¾îµå¹ÙÀÌ½º¸¦ Advisor·Î ¹­¾î¼­ ÇÑ ¹ø¿¡ Ãß°¡
+		// í¬ì¸íŠ¸ ì»·ê³¼ ì–´ë“œë°”ì´ìŠ¤ë¥¼ Advisorë¡œ ë¬¶ì–´ì„œ í•œ ë²ˆì— ì¶”ê°€
 		pfBean.addAdvisor(new DefaultPointcutAdvisor(pointcut, new UppercaseAdvice()));
 		
 		Hello proxiedHello = (Hello) pfBean.getObject();

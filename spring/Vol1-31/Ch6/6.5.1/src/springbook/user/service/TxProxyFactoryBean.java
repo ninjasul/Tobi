@@ -27,7 +27,7 @@ public class TxProxyFactoryBean implements FactoryBean<Object> {
 		this.serviceInterface = serviceInterface;
 	}
 
-	// FactoryBean ÀÎÅÍÆäÀÌ½º ±¸Çö ¸Ş¼Òµå
+	// FactoryBean ì¸í„°í˜ì´ìŠ¤ êµ¬í˜„ ë©”ì†Œë“œ
 	public Object getObject() throws Exception {
 		TransactionHandler txHandler = new TransactionHandler();
 		txHandler.setTarget(target);
