@@ -14,4 +14,4 @@ public class Message {
 	public static Message newMessage(String text) {
 		return new Message(text);
 	}
-}
+} 

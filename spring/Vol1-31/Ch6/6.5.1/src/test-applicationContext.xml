@@ -8,7 +8,7 @@
 		<property name="url" value="jdbc:mysql://localhost/springbook?characterEncoding=UTF-8" />
 		<property name="username" value="spring" />
 		<property name="password" value="book" />
-	</bean>
+	</bean> 
 	
 	<bean id="transactionManager" 
 						class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

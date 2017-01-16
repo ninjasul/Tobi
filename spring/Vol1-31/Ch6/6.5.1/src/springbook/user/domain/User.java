@@ -11,7 +11,7 @@ public class User {
 	
 	public User() {
 	}
-	
+	 
 	public User(String id, String name, String password, String email,
 			Level level, int login, int recommend) {
 		super();
@@ -79,7 +79,7 @@ public class User {
 	public void upgradeLevel() {
 		Level nextLevel = this.level.nextLevel();	
 		if (nextLevel == null) { 								
-			throw new IllegalStateException(this.level + "Àº  ¾÷±×·¹ÀÌµå°¡ ºÒ°¡´ÉÇÕ´Ï´Ù");
+			throw new IllegalStateException(this.level + "ï¿½ï¿½  ï¿½ï¿½ï¿½×·ï¿½ï¿½Ìµå°¡ ï¿½Ò°ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½");
 		}
 		else {
 			this.level = nextLevel;

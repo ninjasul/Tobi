@@ -35,11 +35,11 @@ public class UserDaoTest {
 	
 	@Before
 	public void setUp() {
-		this.user1 = new User("gyumee", "¹Ú¼ºÃ¶", "springno1", "user1@ksug.org", Level.BASIC, 1, 0);
-		this.user2 = new User("leegw700", "ÀÌ±æ¿ø", "springno2", "user2@ksug.org", Level.SILVER, 55, 10);
-		this.user3 = new User("bumjin", "¹Ú¹üÁø", "springno3", "user3@ksug.org", Level.GOLD, 100, 40);
+		this.user1 = new User("gyumee", "ï¿½Ú¼ï¿½Ã¶", "springno1", "user1@ksug.org", Level.BASIC, 1, 0);
+		this.user2 = new User("leegw700", "ï¿½Ì±ï¿½ï¿½", "springno2", "user2@ksug.org", Level.SILVER, 55, 10);
+		this.user3 = new User("bumjin", "ï¿½Ú¹ï¿½ï¿½ï¿½", "springno3", "user3@ksug.org", Level.GOLD, 100, 40);
 	}
-	
+ 	
 	@Test 
 	public void andAndGet() {		
 		dao.deleteAll();
@@ -144,10 +144,10 @@ public class UserDaoTest {
 	public void update() {
 		dao.deleteAll();
 		
-		dao.add(user1);		// ¼öÁ¤ÇÒ »ç¿ëÀÚ
-		dao.add(user2);		// ¼öÁ¤ÇÏÁö ¾ÊÀ» »ç¿ëÀÚ
+		dao.add(user1);		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+		dao.add(user2);		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
 		
-		user1.setName("¿À¹Î±Ô");
+		user1.setName("ï¿½ï¿½ï¿½Î±ï¿½");
 		user1.setPassword("springno6");
 		user1.setEmail("user6@ksug.org");
 		user1.setLevel(Level.GOLD);

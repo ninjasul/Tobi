@@ -12,7 +12,7 @@ import springbook.user.domain.User;
 public class UserServiceImpl implements UserService {
 	public static final int MIN_LOGCOUNT_FOR_SILVER = 50;
 	public static final int MIN_RECCOMEND_FOR_GOLD = 30;
-
+ 
 	private UserDao userDao;
 	private MailSender mailSender;
 

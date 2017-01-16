@@ -34,7 +34,7 @@ public class UserDaoJdbc implements UserDao {
 				return user;
 			}
 		};
-
+ 
 	public void add(User user) {
 		this.jdbcTemplate.update(
 				"insert into users(id, name, password, email, level, login, recommend) " +

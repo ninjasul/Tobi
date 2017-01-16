@@ -13,7 +13,7 @@ public class UserTest {
 	public void setUp() {
 		user = new User();
 	}
-	
+	 
 	@Test()
 	public void upgradeLevel() {
 		Level[] levels = Level.values();

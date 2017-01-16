@@ -13,7 +13,7 @@ public class Calculator {
 				}};
 		return lineReadTemplate(filepath, sumCallback, 0);
 	}
-
+ 
 	public Integer calcMultiply(String filepath) throws IOException {
 		LineCallback<Integer> multiplyCallback = 
 			new LineCallback<Integer>() { 

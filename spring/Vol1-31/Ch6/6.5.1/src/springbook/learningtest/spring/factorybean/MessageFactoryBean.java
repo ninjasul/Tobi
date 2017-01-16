@@ -21,3 +21,4 @@ public class MessageFactoryBean implements FactoryBean<Message> {
 		return true;
 	}
 }
+ 

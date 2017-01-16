@@ -28,4 +28,4 @@ public class FactoryBeanTest {
 		Object factory = context.getBean("&message");
 		assertThat(factory, is(MessageFactoryBean.class));
 	}
-}
+} 
