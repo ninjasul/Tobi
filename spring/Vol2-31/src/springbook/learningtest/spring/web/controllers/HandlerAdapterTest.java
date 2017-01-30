@@ -63,6 +63,7 @@ public class HandlerAdapterTest extends AbstractDispatcherServletTest {
 			return new ModelAndView(viewName.value(), model);
 		}
 		
+		// -1을 리턴하여 캐쉬를 사용하지 않도록 설정
 		public long getLastModified(HttpServletRequest request, Object handler) {
 			return -1;
 		}
