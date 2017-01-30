@@ -31,6 +31,8 @@ public class HandlerAdapterTest extends AbstractDispatcherServletTest {
 	}
 	@Component("/hello")
 	static class HelloController implements SimpleController {
+
+		// 하단에서 정의한 @ViewName과 @RequiredParams 어노테이션을 활용하여 설정
 		@ViewName("/WEB-INF/view/hello.jsp")
 		@RequiredParams({"name"})
 		public void control(Map<String, String> params, Map<String, Object> model) {
@@ -68,11 +70,15 @@ public class HandlerAdapterTest extends AbstractDispatcherServletTest {
 	public interface SimpleController {
 		void control(Map<String, String> params, Map<String, Object> model);
 	}
+	
+	// 어노테이션 정의 - 뷰 이름
 	@Retention(RetentionPolicy.RUNTIME)
 	@Inherited
 	public @interface ViewName {
 		String value();
 	}
+	
+	// 어노테이션 정의 - 필수 파라미터 배열
 	@Retention(RetentionPolicy.RUNTIME)
 	@Inherited
 	public @interface RequiredParams {
