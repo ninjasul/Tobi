@@ -28,12 +28,20 @@ public class SessionAttributesTest extends AbstractDispatcherServletTest {
 		runService();
 		
 		HttpSession session = request.getSession();
+
+		// 모델로 리턴된 user와 HttpSession에 저장된 user가 동일한 오브젝트인지 확인
 		assertThat(session.getAttribute("user"), is(getModelAndView().getModel().get("user")));
 		
 		initRequest("/user/edit", "POST").addParameter("id", "1").addParameter("name", "Spring2");
+		
+		// 이전 요청을 세션을 가져와 설정하여 세션 상태가 유지된 채로 다음 요청을 보내도록 함.
 		request.setSession(session);
 		runService();
+		
+		// 두 번째 요청의 파라미터로는 전달되지 않았으나 세션에 저장되어 있던 user에 email이 반영되었는지 확인 
 		assertThat(((User)getModelAndView().getModel().get("user")).getEmail(), is("mail@spring.com"));
+		
+		// SessionStatus 를 통해 세션에 저장된 user가 제거됐는지 확인
 		assertThat(session.getAttribute("user"), is(nullValue()));
 	}
 	
