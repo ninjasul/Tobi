@@ -1,6 +1,7 @@
 package springbook.learningtest.spring.web.atmvc;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -21,14 +23,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import springbook.learningtest.spring.web.AbstractDispatcherServletTest;
+import org.springframework.validation;
 
 public class ValidatorTest extends AbstractDispatcherServletTest {
 	@Test
 	public void atrvalid() throws ServletException, IOException {
 		setClasses(UserValidator.class, UserController.class);
-		initRequest("/add.do").addParameter("id", "1");//.addParameter("age", "-2");
+		initRequest("/add.do").addParameter("id", "1").addParameter("name", "  ").addParameter("age", "-2");
 		runService();
 	}
+	
 	static class UserValidator implements Validator {
 		public boolean supports(Class<?> clazz) {
 			return (User.class.isAssignableFrom(clazz));
@@ -36,10 +40,10 @@ public class ValidatorTest extends AbstractDispatcherServletTest {
 
 		public void validate(Object target, Errors errors) {
 			User user = (User)target;
-			ValidationUtils.rejectIfEmpty(errors, "name", "field.required");
-			ValidationUtils.rejectIfEmpty(errors, "age", "field.required");
+			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.required", "wrong name" );
+			ValidationUtils.rejectIfEmpty(errors, "age", "field.required", "empty age");
 			if (errors.getFieldError("age") == null)
-				if (user.getAge() < 0) errors.rejectValue("name", "field.min", new Object[] {0}, "min default");
+				if (user.getAge() < 0) errors.rejectValue("age", "field.min", new Object[] {0}, "min default");
 		}
 	}
 	@Controller static class UserController {
@@ -51,6 +55,9 @@ public class ValidatorTest extends AbstractDispatcherServletTest {
 		@RequestMapping("/add") public void add(@ModelAttribute User user, BindingResult result) {
 			validator.validate(user, result);
 			if (result.hasErrors()) {
+				for(FieldError error : result.getFieldErrors()){ 
+					System.out.println("Field: " + error.getField() + ", Message: " +  error.getDefaultMessage());							
+				} 				
 			}
 			else {
 			}
@@ -65,8 +72,12 @@ public class ValidatorTest extends AbstractDispatcherServletTest {
 		initRequest("/add.do").addParameter("id", "1").addParameter("age", "-1");
 		runService();
 	}
-	@Controller static class UserController2 {
-		@Autowired Validator validator;
+	
+	@Controller 
+	static class UserController2 {
+		
+		@Autowired 
+		Validator validator;
 		
 		@InitBinder  public void init(WebDataBinder dataBinder) {
 			dataBinder.setValidator(this.validator);
@@ -77,6 +88,7 @@ public class ValidatorTest extends AbstractDispatcherServletTest {
 			System.out.println(result);
 		}
 	}
+	
 	public static class User {
 		int id;
 		@NotNull
