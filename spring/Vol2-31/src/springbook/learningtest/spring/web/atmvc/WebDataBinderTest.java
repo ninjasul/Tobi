@@ -10,6 +10,9 @@ import javax.servlet.ServletException;
 
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,21 +21,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import springbook.learningtest.spring.web.AbstractDispatcherServletTest;
 
 public class WebDataBinderTest extends AbstractDispatcherServletTest {
+	
 	@Test
 	public void allowed() throws ServletException, IOException {
 		setClasses(UserController.class);
-		initRequest("/add.do", "POST").addParameter("id", "1").addParameter("name", "name");
+		initRequest("/add.do", "POST").addParameter("id", "1").addParameter("name", "DY");
 		runService();
 		User user = (User) getModelAndView().getModel().get("user");
 		assertThat(user.getId(), is(1));
 		assertThat(user.getName(), is(nullValue()));
 	}
-	@Controller static class UserController {
+	
+	@Controller 
+	static class UserController {
 		@InitBinder
 		public void initBinder(WebDataBinder dataBinder) {
-			dataBinder.setAllowedFields("id");
+			//dataBinder.setAllowedFields("id");
+			//dataBinder.setDisallowedFields("id", "name");
+			dataBinder.setRequiredFields("type");
 		}		
-		@RequestMapping("/add") public void add(@ModelAttribute User user) {
+		@RequestMapping("/add") 
+		public void add(@ModelAttribute User user, BindingResult result) {
+			//System.out.println("Id: " + user.id);
+			//System.out.println("Name: " + user.name);
+			//System.out.println("Type: " + user.type);
+			
+			if( result.hasErrors() ) {
+				for( FieldError curError : result.getFieldErrors() ) {
+					System.out.println( "Field name: " + curError.getField() + ", Message: " + curError.getDefaultMessage() ); 
+				}
+			}			
 		}
 	}
 	
@@ -78,7 +96,7 @@ public class WebDataBinderTest extends AbstractDispatcherServletTest {
 		}
 		public void setType(String type) {
 			this.type = type;
-		}
+		}		
 		@Override
 		public String toString() {
 			return "User [flag=" + flag + ", id=" + id + ", name=" + name
